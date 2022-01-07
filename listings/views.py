@@ -7,6 +7,6 @@ def listing(request):
     return render(request, 'listing/listings.html')
 
 def search(request):
-    return render(request, 'search/listings.html')
+    return render(request, 'listings/search.html')
 
 
