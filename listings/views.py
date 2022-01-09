@@ -8,8 +8,8 @@ def index(request):
     }
     return render(request, 'listings/listings.html',context)
 
-def listing(request):
-    return render(request, 'listing/listings.html')
+def listing(request, tutor_id):
+    return render(request, 'listings/listing.html')
 
 def search(request):
     return render(request, 'listings/search.html')

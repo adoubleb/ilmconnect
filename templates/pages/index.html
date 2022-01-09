@@ -1,120 +1,96 @@
 {% extends 'base.html' %} 
 
 {% block content %} 
-<section id="showcase">
+<section id="showcase" style="background-image: url(https://images.indianexpress.com/2015/07/madrasa-7591.jpg);">
     <div class="container text-center">
       <div class="home-search p-5">
         <div class="overlay p-5">
           <h1 class="display-4 mb-4">
-            Property Searching Just Got So Easy
+            Ukhrawi + Academic Tuition Searching Made Easy
           </h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
-            voluptatum tempore! Consectetur, id commodi!</p>
+          <p class="lead">An online repository of ukhrawi & academic tutors in Singapore to link up with</p>
           <div class="search">
             <form action="search.html">
               <!-- Form Row 1 -->
               <div class="form-row">
                 <div class="col-md-4 mb-3">
-                  <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
+                  <label class="sr-only">Subjects</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Subject (Arabic, Fiqh, Math, etc.)">
                 </div>
 
                 <div class="col-md-4 mb-3">
-                  <label class="sr-only">City</label>
-                  <input type="text" name="city" class="form-control" placeholder="City">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">State</label>
+                  <label class="sr-only">Level</label>
                   <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">State (All)</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District Of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
+                    <option selected="true" disabled="disabled">Level</option>
+                    <option value="AL">Primary</option>
+                    <option value="AK">Secondary</option>
+                    <option value="AK">Pre-U/JC</option>
+                    <option value="AK">Adult</option>
                   </select>
                 </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" id="exampleRadios1" value="option1" >
+                  <label class="form-check-label" for="exampleRadios1">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" id="exampleRadios2" value="option2">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Female
+                  </label>
+                </div>
+                
               </div>
               <!-- Form Row 2 -->
               <div class="form-row">
-                <div class="col-md-6 mb-3">
-                  <label class="sr-only">Bedrooms</label>
-                  <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                <div class="col-md-5 mb-3">
+                  <label class="sr-only">Location</label>
+                  <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">Residence</option>
+                    <option value="AL">Admiralty</option>
+                    <option value="AK">Ang Mo Kio</option>
+                    <option value="AZ">Bishan</option>
+                    <option value="AR">Boon Lay</option>
+                    <option value="CA">Tampines</option>
+                    <option value="CO">Bedok</option>
+                    <option value="CT">Pasir Ris</option>
+                    <option value="DE">Punggol</option>
+                    <option value="DC">Woodlands</option>
+                    <option value="FL">Choa Chu Kang</option>
+                    <option value="GA">Khatib</option>
+                    <option value="HI">Yishun</option>
+                    <option value="ID">Jurong East</option>
+                    <option value="IL">Jurong West</option>
+                    <option value="IN">Sembawang</option>
+                    <option value="IA">Novena</option>
+                    <option value="KS">Bukit Timah</option>
+                    <option value="KY">Orchard Road</option>
+                    <option value="LA">Little India</option>
+                    <option value="ME">Bukit Batok</option>
+                    <option value="MD">Bukit Gombak</option>
+                    <option value="MA">Toa Payoh</option>
                   </select>
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-5 mb-3">
                   <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">Max Price (Any)</option>
-                    <option value="100000">$100,000</option>
-                    <option value="200000">$200,000</option>
-                    <option value="300000">$300,000</option>
-                    <option value="400000">$400,000</option>
-                    <option value="500000">$500,000</option>
-                    <option value="600000">$600,000</option>
-                    <option value="700000">$700,000</option>
-                    <option value="800000">$800,000</option>
-                    <option value="900000">$900,000</option>
-                    <option value="1000000">$1M+</option>
+                    <option selected="true" disabled="disabled">Max Rate per Hour (Any)</option>
+                    <option value="100000">Free</option>
+                    <option value="200000">$10</option>
+                    <option value="200000">$15</option>
+                    <option value="300000">$20</option>
+                    <option value="200000">$25</option>
+                    <option value="400000">$30</option>
                   </select>
                 </div>
+                <div class="form-check col-md-2 mb-3">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    ARS-Certified
+                  </label>
+                </div>
+                
               </div>
               <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
             </form>
@@ -127,7 +103,7 @@
   <!-- Listings -->
   <section id="listings" class="py-5">
     <div class="container">
-      <h3 class="text-center mb-3">Latest Listings</h3>
+      <h3 class="text-center mb-3">Latest Tutors</h3>
       <div class="row">
         <!-- Listing 1 -->
         <div class="col-md-6 col-lg-4 mb-4">
@@ -265,26 +241,17 @@
   <section id="services" class="py-5 bg-secondary text-white">
     <div class="container">
       <div class="row text-center">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <i class="fas fa-comment fa-4x mr-4"></i>
           <hr>
-          <h3>Consulting Services</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <h3>Want to talk to tutors more?</h3>
+          <p>Submit an inquiry through the Tutors page to specific tutors. Tutors will be notified and will contact you via the contact points you leave.</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <i class="fas fa-home fa-4x mr-4"></i>
           <hr>
-          <h3>Propery Management</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
-        </div>
-        <div class="col-md-4">
-          <i class="fas fa-suitcase fa-4x mr-4"></i>
-          <hr>
-          <h3>Renting & Selling</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <h3>Can't find a suitable tutor?</h3>
+          <p>Consider loosening your conditions or submit an assignment via the assignment submission page. Tutors with accounts will be notified of new assignments.</p>
         </div>
       </div>
     </div>
