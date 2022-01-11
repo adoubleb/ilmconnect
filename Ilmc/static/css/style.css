@@ -95,5 +95,14 @@ img {
   #showcase-inner h1 {
     font-size: 40px; } }
 
+#image_standardize{
+  display: inline;
+}
+
+#image_standardize img{
+  max-height: 200px;
+  max-width: 200px;
+  object-fit: cover;
+}
 
 
