@@ -26,7 +26,8 @@ def search(request):
     if 'subject' in request.GET:
         subject = request.GET['subject']
         if subject:
-            queryset_list = queryset_list.filter(subjects__iexact=subject)
+            queryset_list = queryset_list.filter(subjects__contains=subject)
+        
     context = {
         'tutors': queryset_list,
         'location_choices': location_choices,
