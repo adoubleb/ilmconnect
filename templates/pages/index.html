@@ -10,72 +10,45 @@
           </h1>
           <p class="lead">An online repository of ukhrawi & academic tutors in Singapore to link up with</p>
           <div class="search">
-            <form action="search.html">
+            <form action="{% url 'search' %}">
               <!-- Form Row 1 -->
               <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">Subjects</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Subject (Arabic, Fiqh, Math, etc.)">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">Level</label>
-                  <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">Level</option>
-                    <option value="AL">Primary</option>
-                    <option value="AK">Secondary</option>
-                    <option value="AK">Pre-U/JC</option>
-                    <option value="AK">Adult</option>
+                <div class="col-md-5 mb-3">
+                  <label class="sr-only">Subject</label>
+                  <select name="subject" class="form-control">
+                    <option selected="true" disabled="disabled">Subject</option>
+                    {% for key, value in subject_choices.items %}
+                      <option value="{{ key }}">{{ value}}</option>
+                    {% endfor %} 
                   </select>
                 </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" id="exampleRadios1" value="option1" >
-                  <label class="form-check-label" for="exampleRadios1">
-                    Male
-                  </label>
+                <div class="col-md-5 mb-3">
+                  <label class="sr-only">Level</label>
+                  <select name="level" class="form-control">
+                    <option selected="true" disabled="disabled">Level</option>
+                    {% for key, value in level_choices.items %}
+                      <option value="{{ key }}">{{ value}}</option>
+                    {% endfor %} 
+                  </select>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" id="exampleRadios2" value="option2">
-                  <label class="form-check-label" for="exampleRadios2">
-                    Female
-                  </label>
-                </div>
+
                 
               </div>
               <!-- Form Row 2 -->
               <div class="form-row">
                 <div class="col-md-5 mb-3">
                   <label class="sr-only">Location</label>
-                  <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">Residence</option>
-                    <option value="AL">Admiralty</option>
-                    <option value="AK">Ang Mo Kio</option>
-                    <option value="AZ">Bishan</option>
-                    <option value="AR">Boon Lay</option>
-                    <option value="CA">Tampines</option>
-                    <option value="CO">Bedok</option>
-                    <option value="CT">Pasir Ris</option>
-                    <option value="DE">Punggol</option>
-                    <option value="DC">Woodlands</option>
-                    <option value="FL">Choa Chu Kang</option>
-                    <option value="GA">Khatib</option>
-                    <option value="HI">Yishun</option>
-                    <option value="ID">Jurong East</option>
-                    <option value="IL">Jurong West</option>
-                    <option value="IN">Sembawang</option>
-                    <option value="IA">Novena</option>
-                    <option value="KS">Bukit Timah</option>
-                    <option value="KY">Orchard Road</option>
-                    <option value="LA">Little India</option>
-                    <option value="ME">Bukit Batok</option>
-                    <option value="MD">Bukit Gombak</option>
-                    <option value="MA">Toa Payoh</option>
+                  <select name="location" class="form-control">
+                    <option selected="true" disabled="disabled">Location</option>
+                    {% for key, value in location_choices.items %}
+                      <option value="{{ key }}">{{ value}}</option>
+                    {% endfor %} 
                   </select>
                 </div>
                 <div class="col-md-5 mb-3">
                   <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">Max Rate per Hour (Any)</option>
+                    <option selected="true" disabled="disabled">Max Rate per Hour</option>
                     <option value="100000">Free</option>
                     <option value="200000">$10</option>
                     <option value="200000">$15</option>

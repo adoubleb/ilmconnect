@@ -1,4 +1,127 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>search</h1>
+<section id="showcase-inner-search" class="showcase-search text-white py-5">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <form action="search.html">
+            <!-- Form Row 1 -->
+            <div class="form-row">
+              <div class="col-md-3 mb-4">
+                <label class="sr-only">Subject</label>
+                <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">Subject</option>
+                    {% for key, value in subject_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %} 
+                </select>
+              </div>
+
+              <div class="col-md-2 mb-4">
+                <label class="sr-only">Level</label>
+                <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">Level</option>
+                    {% for key, value in level_choices.items %}
+                      <option value="{{ key }}">{{ value}}</option>
+                    {% endfor %} 
+                  </select>
+              </div>
+
+              <div class="col-md-3 mb-4">
+                <label class="sr-only">Location</label>
+                <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">Location</option>
+                    {% for key, value in location_choices.items %}
+                      <option value="{{ key }}">{{ value}}</option>
+                    {% endfor %} 
+                  </select>
+              </div>
+              <div class="form-check col-md-2 mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  ARS-Certified
+                </label>
+              </div>
+              <button class="btn btn-primary btn-sm col-md-1 mb-3" type="submit">Search</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'listings' %}">Browse Tutors</a>
+          </li>
+          <li class="breadcrumb-item active"> Search Results</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+
+        {% if tutors %}
+        {% for tutor in tutors %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="{{ tutor.photo_main.url }}" alt="">
+              <div class="card-img-overlay">
+                <h2>
+                  <span class="badge badge-secondary text-white">{{ tutor.id}}</span>
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">{{ tutor.name }}</h4>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-th-large"></i>Subjects: {{tutor.subjects}}</div>
+                  <div class="col-6">
+                    <i class="fas fa-car"></i> Location: {{ tutor.location }}</div>
+                </div>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-bed"></i> Rate: {{ tutor.levels }}</div>
+                  <div class="col-6">
+                    <i class="fas fa-bath"></i> Education: {{ tutor.education }}</div>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-12">
+                    <i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6">
+                    <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                </div>
+                <hr>
+                <a href="{% url 'listing' tutor.id %}" class="btn btn-primary btn-block">More Info</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-md-12">
+          <p>No Listings Available</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </section>
 {% endblock %} 
