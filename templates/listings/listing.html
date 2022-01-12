@@ -1,68 +1,109 @@
 {% extends 'base.html' %}
 
 {% load humanize %}
-
+{% block title %} | {{ tutors.name }} {% endblock %}
 {% block content %}
 
+
+<section id="bc" class="mt-3">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index'%}">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'listings'%}">Listings</a>
+          </li>
+          <li class="breadcrumb-item active">{{tutors.name}}</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{ tutors.name }}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 <section id="listing" class="py-4">
     <div class="container">
-      <a href="listings.html" class="btn btn-light mb-4">Back To Listings</a>
+      <a href="{% url 'listings'%}" class="btn btn-light mb-4">Back To Browse Tutors</a>
       <div class="row">
         <div class="col-md-9">
           <!-- Home Main Image -->
-          <img src="assets/img/homes/home-1.jpg" alt="" class="img-main img-fluid mb-3">
+          <img src="{{ tutors.photo_main.url }}" alt="" class="img-main img-fluid mb-3">
           <!-- Thumbnails -->
           <div class="row mb-5 thumbs">
+            {% if tutors.photo_1 %}
             <div class="col-md-2">
-              <a href="assets/img/homes/home-inside-1.jpg" data-lightbox="home-images">
-                <img src="assets/img/homes/home-inside-1.jpg" alt="" class="img-fluid">
-              </a>
+                <a href="{{ tutors.photo_1.url }}" data-lightbox="home-images">
+                <img src="{{ tutors.photo_1.url }}" alt="" class="img-fluid">
+                </a>
             </div>
+            {% endif %}
+            {% if tutors.photo_2 %}
             <div class="col-md-2">
-              <a href="assets/img/homes/home-inside-2.jpg" data-lightbox="home-images">
-                <img src="assets/img/homes/home-inside-2.jpg" alt="" class="img-fluid">
-              </a>
+                <a href="{{ tutors.photo_2.url }}" data-lightbox="home-images">
+                <img src="{{ tutors.photo_2.url }}" alt="" class="img-fluid">
+                </a>
             </div>
+            {% endif %}
+            {% if tutors.photo_3 %}
             <div class="col-md-2">
-              <a href="assets/img/homes/home-inside-3.jpg" data-lightbox="home-images">
-                <img src="assets/img/homes/home-inside-3.jpg" alt="" class="img-fluid">
-              </a>
+                <a href="{{ tutors.photo_3.url }}" data-lightbox="home-images">
+                <img src="{{ tutors.photo_3.url }}" alt="" class="img-fluid">
+                </a>
             </div>
+            {% endif %}
+            {% if tutors.photo_4 %}
             <div class="col-md-2">
-              <a href="assets/img/homes/home-inside-4.jpg" data-lightbox="home-images">
-                <img src="assets/img/homes/home-inside-4.jpg" alt="" class="img-fluid">
-              </a>
+                <a href="{{ tutors.photo_4.url }}" data-lightbox="home-images">
+                <img src="{{ tutors.photo_4.url }}" alt="" class="img-fluid">
+                </a>
             </div>
+            {% endif %}
+            {% if tutors.photo_5 %}
             <div class="col-md-2">
-              <a href="assets/img/homes/home-inside-5.jpg" data-lightbox="home-images">
-                <img src="assets/img/homes/home-inside-5.jpg" alt="" class="img-fluid">
-              </a>
+                <a href="{{ tutors.photo_5.url }}" data-lightbox="home-images">
+                <img src="{{ tutors.photo_5.url }}" alt="" class="img-fluid">
+                </a>
             </div>
+            {% endif %}
+            {% if tutors.photo_6 %}
             <div class="col-md-2">
-              <a href="assets/img/homes/home-inside-6.jpg" data-lightbox="home-images">
-                <img src="assets/img/homes/home-inside-6.jpg" alt="" class="img-fluid">
-              </a>
+                <a href="{{ tutors.photo_6.url }}" data-lightbox="home-images">
+                <img src="{{ tutors.photo_6.url }}" alt="" class="img-fluid">
+                </a>
             </div>
-          </div>
+            {% endif %}
+            </div>
+        
           <!-- Fields -->
           <div class="row mb-5 fields">
             <div class="col-md-6">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-money-bill-alt"></i> Asking Price:
-                  <span class="float-right">{{tutor.subjects}}</span>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    Educational Background:
+                  <span class="float-right">{{tutors.education}}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> Bedrooms:
-                  <span class="float-right">3</span>
+                    <i class="fa fa-book" aria-hidden="true"></i> Subjects:
+                  <span class="float-right">{{tutors.subjects}}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-bath"></i> Bathrooms:
-                  <span class="float-right">2</span>
+                    <i class="fa fa-hourglass-end" aria-hidden="true"></i> Years of Experience Tutoring:
+                  <span class="float-right">{{tutors.years_experience}}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-car"></i> Garage:
-                  <span class="float-right">2
+                    <i class="fa fa-university" aria-hidden="true"></i></i> Levels Teaching;
+                  <span class="float-right">{{tutors.levels}}
                   </span>
                 </li>
               </ul>
@@ -70,21 +111,22 @@
             <div class="col-md-6">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-th-large"></i> Square Feet:
-                  <span class="float-right">3200</span>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    Tutoring Locatons:
+                  <span class="float-right">{{tutors.locations}}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-square"></i> Lot Size:
-                  <span class="float-right">2.5 Acres
+                  <i class="fas fa-square"></i> Starting Rate:
+                  <span class="float-right"> $20/hr
                   </span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-calendar"></i> Listing Date:
-                  <span class="float-right">8/30/2018</span>
+                  <i class="fas fa-calendar"></i> Endorsed by:
+                  <span class="float-right">Abdussatorov</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> Realtor:
-                  <span class="float-right">Kyle Brown
+                  <i class="fas fa-bed"></i> ARS status:
+                  <span class="float-right">Uncertified
                   </span>
                 </li>
 
@@ -96,20 +138,11 @@
           <!-- Description -->
           <div class="row mb-5">
             <div class="col-md-12">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia recusandae esse reiciendis officia omnis non rerum dicta
-              cupiditate nostrum molestias deserunt aut minus inventore animi atque, consequuntur ad fugit. Possimus culpa
-              blanditiis repellendus ipsa similique ullam, natus error dolor harum.
+              {{tutors.description}}
             </div>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card mb-3">
-            <img class="card-img-top" src="assets/img/realtors/kyle.jpg" alt="Seller of the month">
-            <div class="card-body">
-              <h5 class="card-title">Property Realtor</h5>
-              <h6 class="text-secondary">Kyle Brown</h6>
-            </div>
-          </div>
           <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
         </div>
       </div>
@@ -129,8 +162,8 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="property_name" class="col-form-label">Property:</label>
-              <input type="text" name="listing" class="form-control" value="45 Drivewood Cirlce" disabled>
+              <label for="property_name" class="col-form-label">Tutor:</label>
+              <input type="text" name="listing" class="form-control" value="{{tutors.name}}" disabled>
             </div>
             <div class="form-group">
               <label for="name" class="col-form-label">Name:</label>

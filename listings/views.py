@@ -14,11 +14,12 @@ def index(request):
 
 
 def listing(request, tutor_id):
-    tutors = get_object_or_404(Tutors, pk= tutor_id)
+    tutors = get_object_or_404(Tutors, pk=tutor_id)
     context = {
-        'tutors' : tutors
+        'tutors': tutors
     }
     return render(request, 'listings/listing.html', context)
+    
 def search(request):
     return render(request, 'listings/search.html')
 
