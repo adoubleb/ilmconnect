@@ -1,50 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
-<section id="showcase-inner-search" class="showcase-search text-white py-5">
+<section id="showcase-inner-search" class="showcase-search text-white py-4">
     <div class="container">
       <div class="row text-center">
-        <div class="col-md-12">
-          <form action="search.html">
+        <div class="search">
+          <form action="{% url 'search' %}">
             <!-- Form Row 1 -->
             <div class="form-row">
-              <div class="col-md-3 mb-4">
+              <div class="col-md-5 mb-3">
                 <label class="sr-only">Subject</label>
-                <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">Subject</option>
-                    {% for key, value in subject_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %} 
+                <select name="subject" class="form-control">
+                  <option selected="true" disabled="disabled">Subject</option>
+                  {% for key, value in subject_choices.items %}
+                    <option value="{{ key }}"
+                    {% if key == values.subject %}
+                      selected
+                    {% endif %}>
+                      {{ value }}</option>
+                  {% endfor %} 
                 </select>
               </div>
 
-              <div class="col-md-2 mb-4">
+              <div class="col-md-5 mb-3">
                 <label class="sr-only">Level</label>
-                <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">Level</option>
-                    {% for key, value in level_choices.items %}
-                      <option value="{{ key }}">{{ value}}</option>
-                    {% endfor %} 
-                  </select>
+                <select name="level" class="form-control">
+                  <option selected="true" disabled="disabled">Level</option>
+                  {% for key, value in level_choices.items %}
+                    <option value="{{ key }}"
+                    {% if key == values.level %}
+                      selected
+                    {% endif %}>
+                      {{ value}}</option>
+                  {% endfor %} 
+                </select>
               </div>
-
-              <div class="col-md-3 mb-4">
+              <div class="col-md-5 mb-3">
                 <label class="sr-only">Location</label>
-                <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">Location</option>
-                    {% for key, value in location_choices.items %}
-                      <option value="{{ key }}">{{ value}}</option>
-                    {% endfor %} 
-                  </select>
+                <select name="location" class="form-control">
+                  <option selected="true" disabled="disabled">Location</option>
+                  {% for key, value in location_choices.items %}
+                    <option value="{{ key }}"
+                    {% if key == values.location %}
+                      selected
+                    {% endif %}>
+                    {{ value}}</option>
+                  {% endfor %} 
+                </select>
+              </div>
+              <div class="col-md-5 mb-3">
+                <select name="price" class="form-control" id="type">
+                  <option selected="true" disabled="disabled">Max Rate per Hour</option>
+                  <option value="100000">Free</option>
+                  <option value="200000">$10</option>
+                  <option value="200000">$15</option>
+                  <option value="300000">$20</option>
+                  <option value="200000">$25</option>
+                  <option value="400000">$30</option>
+                </select>
               </div>
               <div class="form-check col-md-2 mb-3">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="True" name = "ARS-Certified" id="flexCheckDefault">
+                <label class="form-check-label" for="ARS-Certified">
                   ARS-Certified
                 </label>
               </div>
-              <button class="btn btn-primary btn-sm col-md-1 mb-3" type="submit">Search</button>
-            </div>
-            
+              <div class="form-check col-md-2 mb-3"></div>
+                <button class="btn btn-secondary btn-block mt-0" type="submit">Submit form</button>
+              </div>
           </form>
         </div>
       </div>

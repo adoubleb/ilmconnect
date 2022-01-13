@@ -27,12 +27,21 @@ def search(request):
         subject = request.GET['subject']
         if subject:
             queryset_list = queryset_list.filter(subjects__contains=subject)
+    if 'location' in request.GET:
+        location = request.GET['location']
+        if location:
+            queryset_list = queryset_list.filter(locations__contains=location)
+    if 'level' in request.GET:
+        level = request.GET['level']
+        if level:
+            queryset_list = queryset_list.filter(levels__contains=level)
         
     context = {
         'tutors': queryset_list,
         'location_choices': location_choices,
         'level_choices':level_choices,
         'subject_choices':subject_choices,
+        'values': request.GET
     }
     return render(request, 'listings/search.html', context)
 

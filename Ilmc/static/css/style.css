@@ -65,7 +65,7 @@ img {
 #showcase-inner-search {
   position: relative;
   overflow: hidden;
-  height: 150px; }
+  height: 180px; }
   #showcase-inner-search::before {
     content: '';
     position: absolute;
@@ -75,7 +75,7 @@ img {
     width: 100%;
     background: rgba(32, 134, 107, 0.8); }
   #showcase-inner-search.showcase-search {
-    height: 150px; }
+    height: 180px; }
 
 #work {
   padding: 6rem 0; }
