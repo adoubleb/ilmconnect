@@ -22,13 +22,13 @@ def contact(request):
     contact.save()
 
     # Send email
-    # send_mail(
-    #   'Property Listing Inquiry',
-    #   'There has been an inquiry for ' + tutor + '. Sign into the admin panel for more info',
-    #   'traversy.brad@gmail.com',
-    #   [tutor_email, '@gmail.com'],
-    #   fail_silently=False
-    # )
+    send_mail(
+      'ILMC Tutor Inquiry',
+      'There has been an inquiry for ' + tutor + 'by' + name + 'for' + subject + 'at' + level + '. Location:' + location + '. Phone number of tutee: ' + phone + '. Email of tutee:' + email + 'Additional message by tutee:' + message +'.',
+      'ilmconnecttechguy@gmail.com',
+      [tutor_email, 'blowurmind007@gmail.com'],
+      fail_silently=False
+    )
 
     messages.success(request, 'Your request has been submitted, a realtor will get back to you soon')
     return redirect('/listings/'+tutor_id)
