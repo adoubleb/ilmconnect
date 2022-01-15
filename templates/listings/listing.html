@@ -160,10 +160,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="{% url 'contact' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="tutor_email" value="{{ tutors.email }}">
+            <input type="hidden" name="tutor_id" value="{{ tutors.id }}">
             <div class="form-group">
               <label for="property_name" class="col-form-label">Tutor:</label>
-              <input type="text" name="listing" class="form-control" value="{{tutors.name}}" disabled>
+              <input type="text" name="tutor" class="form-control" value="{{ tutors.name }}">
             </div>
             <div class="form-group">
               <label for="name" class="col-form-label">Name:</label>
@@ -175,7 +178,19 @@
             </div>
             <div class="form-group">
               <label for="phone" class="col-form-label">Phone:</label>
-              <input type="text" name="phone" class="form-control">
+              <input type="text" name="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="subject" class="col-form-label">Subject:</label>
+              <input type="text" name="subject" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label for="level" class="col-form-label">Level:</label>
+              <input type="text" name="level" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label for="location" class="col-form-label">Location:</label>
+              <input type="text" name="location" class="form-control" >
             </div>
             <div class="form-group">
               <label for="message" class="col-form-label">Message:</label>
