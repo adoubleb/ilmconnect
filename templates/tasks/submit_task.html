@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% block title %} | 'Tasks' {% endblock %}
+{% block content %}
+
+
+<section id="bc" class="mt-3">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index'%}">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'submit_task'%}">Submit Task</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-5">Submit Task</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include 'partials/_alerts.html' %}
+  <div class="submit_task m-5">
+    <form action="{% url 'submit_task' %}" method="POST">
+      {% csrf_token %}
+  
+      <div class="form-group ">
+        <label for="phone" class="col-form-label">Contact Number</label>
+        <input type="number" name="phone" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email" class="col-form-label">Contact Email:</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="subject" class="col-form-label">Subject:</label>
+        <input type="text" name="subject" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="subject" class="col-form-label">Level:</label>
+        <input type="text" name="level" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="location" class="col-form-label">Location:</label>
+        <input type="text" name="location" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="rate" class="col-form-label">Rate/hour:</label>
+        <input type="number" name="rate" class="form-control" >
+      </div>
+      
+      <div class="form-group">
+        <label for="message" class="col-form-label">Additional Notes:</label>
+        <textarea name="message" class="form-control"></textarea>
+      </div>
+      <hr>
+      <input type="submit" value="Send" class="btn btn-block btn-secondary">
+    </form>
+  </div>
+
+
+{% endblock %}
