@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% block title %} | 'Tasks' {% endblock %}
+{% block content %}
+
+
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-5">Edit Profile</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <h2>Update profile here. To publish profile check the published button. </h2>
+  {% include 'partials/_alerts.html' %}
+  <div class="edit_profile m-5">
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+  
+      {{form.as_p}}
+    </form>
+  </div>
+
+
+{% endblock %}

@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.db.models.fields import BooleanField
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
+from datetime import datetime
+
 class Tutors(models.Model):
   SUBJECT_CHOICES = (
     ('Quran', 'Quran'),
@@ -32,6 +35,11 @@ class Tutors(models.Model):
     ('West','West'),
   )
 
+  GENDER_CHOICES = (
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+  )
+  user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
   name = models.CharField(max_length=200)
   description = models.TextField(blank=True)
   phone = models.CharField(max_length=20)
@@ -41,7 +49,7 @@ class Tutors(models.Model):
   subjects = MultiSelectField(choices = SUBJECT_CHOICES)
   locations = MultiSelectField(choices = LOCATION_CHOICES)
   levels = MultiSelectField(choices = LEVEL_CHOICES)
-  is_female = BooleanField()
+  gender = models.CharField(max_length = 20, choices= GENDER_CHOICES, default= 'Male')
   photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/')
   photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
   photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
@@ -50,5 +58,7 @@ class Tutors(models.Model):
   photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
   photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
   is_ars = BooleanField(default=True)
+  list_date = models.DateTimeField(default=datetime.now, blank=True)
+  is_published = models.BooleanField(default=False)
   def __str__(self):
     return self.name

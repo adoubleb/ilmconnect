@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from .forms import ProfileForm
+from listings.models import Tutors
 def register(request):
     if request.method == 'POST':
     # Get form values
@@ -58,3 +60,14 @@ def logout(request):
 
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
+def profile(request):
+  form = ProfileForm()
+
+  if request.method == 'POST':
+    form = ProfileForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+
+
+  context = {'form':form}
+  return render(request, 'accounts/profile.html', context)
