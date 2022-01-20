@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
-from .forms import ProfileForm
+from .forms import CreateProfileForm, UpdateProfileForm
 from listings.models import Tutors
+from django import forms
 def register(request):
     if request.method == 'POST':
     # Get form values
@@ -60,14 +61,71 @@ def logout(request):
 
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
-def profile(request):
-  form = ProfileForm()
+# def create_profile(request):
+#   try:
+#     tutor = request.user.tutors
+#     form = ProfileForm(instance=tutor)
+#   except:
+#     form = ProfileForm()
+#   if request.method == 'POST':
+#     form = ProfileForm(request.POST, request.FILES)
+#     if form.is_valid():
+#       print('form is valid')
+#       form.save()
 
-  if request.method == 'POST':
-    form = ProfileForm(request.POST, request.FILES)
-    if form.is_valid():
-      form.save()
+
+#   context = {'form':form}
+#   return render(request, 'accounts/profile.html', context)
+
+def edit_profile(request):
+  user_id = request.user.id
+  try:
+    profile = Tutors.objects.get(user_id = user_id )
+  except:
+    profile = None
+  if profile:
+    tutor = request.user.tutors
+    tutor_id = request.user.id
+    tutor_profile = Tutors.objects.get(user_id = tutor_id)
+    form = UpdateProfileForm(instance= tutor)
+    if request.method == 'POST':
+      form = UpdateProfileForm(request.POST, request.FILES, instance = tutor_profile)
+      if form.is_valid():
+        form.save()
+
+    context = {'form':form}
+    return render(request, 'accounts/profile.html', context)
+  if not profile:
+    tutor_id = request.user.id
+    form = UpdateProfileForm()
+    if request.method == 'POST':
+      form = UpdateProfileForm(request.POST, request.FILES)
+      if form.is_valid():
+        form.save()
+    context = {'form':form}
+    return render(request, 'accounts/profile.html', context)
 
 
-  context = {'form':form}
-  return render(request, 'accounts/profile.html', context)
+
+
+  # try:
+  #   tutor = request.user.tutors
+  #   tutor_id = request.user.id
+  #   tutor_profile = Tutors.objects.get(user_id = tutor_id)
+  #   form = UpdateProfileForm(instance= tutor)
+  #   if request.method == 'POST':
+  #     form = UpdateProfileForm(request.POST, request.FILES, instance = tutor_profile)
+  #     if form.is_valid():
+  #       form.save()
+        
+  #   context = {'form':form}
+  #   return render(request, 'accounts/profile.html', context)
+  # except:
+  #   tutor_id = request.user.id
+  #   form = UpdateProfileForm()
+  #   if request.method == 'POST':
+  #     form = UpdateProfileForm(request.POST, request.FILES)
+  #     if form.is_valid():
+  #       form.save()
+  #   context = {'form':form}
+  #   return render(request, 'accounts/profile.html', context)

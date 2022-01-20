@@ -5,9 +5,14 @@ from django import forms
 
 from listings.models import Tutors
 
-class ProfileForm(forms.ModelForm):
-  
+class CreateProfileForm(forms.ModelForm):
     class Meta:
         model = Tutors
         fields = '__all__'
-        exclude = ['user', 'list_date']
+        exclude = ['list_date']
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Tutors
+        fields = '__all__'
+        exclude = ['list_date']

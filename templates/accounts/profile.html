@@ -17,10 +17,11 @@
   <h2>Update profile here. To publish profile check the published button. </h2>
   {% include 'partials/_alerts.html' %}
   <div class="edit_profile m-5">
-    <form method="POST" action="" enctype="multipart/form-data">
-      {% csrf_token %}
-  
-      {{form.as_p}}
+    <form method="POST" action= "{% url 'profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{form.as_p}}
+        <input class="btn btn-primary" type="submit" name="Update Information">
     </form>
   </div>
 
