@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from .forms import CreateProfileForm, UpdateProfileForm
 from listings.models import Tutors
 from django import forms
+from contacts.models import Contact
+from tasks.models import Task
 def register(request):
     if request.method == 'POST':
     # Get form values
@@ -60,7 +62,26 @@ def logout(request):
     return redirect('index')
 
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+  user_id = request.user.id
+  try:
+    tutor_profile = Tutors.objects.get(user_id = user_id)
+  except:
+    tutor_profile = None
+  if tutor_profile:
+    tutor_id = tutor_profile.id
+    tutor_contacts = Contact.objects.order_by('-contact_date').filter(tutor_id = tutor_id)
+    tasks = Task.objects.order_by('-submit_date').filter(is_published=True)
+    context = {
+      'contacts': tutor_contacts,
+      'tasks': tasks,
+    }
+    return render(request, 'accounts/dashboard.html',context)
+  if not tutor_profile:
+    tasks = Task.objects.order_by('-submit_date').filter(is_published=True)
+    context = {
+      'tasks': tasks,
+    }
+    return render(request, 'accounts/start_dashboard.html')
 # def create_profile(request):
 #   try:
 #     tutor = request.user.tutors
