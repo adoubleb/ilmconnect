@@ -4,8 +4,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import Tutors
 from listings.choices import location_choices, level_choices, subject_choices
 def index(request):
-    tutors = Tutors.objects.all()
-    paginator = Paginator(tutors,3)
+    tutors = Tutors.objects.order_by('-list_date').filter(is_published=True)
+    paginator = Paginator(tutors,6)
     page = request.GET.get("page")
     paged_tutors = paginator.get_page(page)
     context = {
@@ -35,6 +35,11 @@ def search(request):
         level = request.GET['level']
         if level:
             queryset_list = queryset_list.filter(levels__contains=level)
+    if 'ARS-Certified' in request.GET:
+        is_Ars = request.GET['ARS-Certified']
+        if is_Ars:
+            queryset_list = queryset_list.filter(is_ars=True)
+    queryset_list = queryset_list.filter(is_published=True)
         
     context = {
         'tutors': queryset_list,

@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from listings.models import Tutors
 from listings.choices import location_choices, level_choices, subject_choices
 def index(request):
-    tutors = Tutors.objects.all()[:3]
+    tutors = Tutors.objects.order_by('-list_date').filter(is_published=True)
     context = {
         'tutors': tutors,
         'location_choices': location_choices,

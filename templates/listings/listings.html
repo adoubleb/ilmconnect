@@ -5,7 +5,7 @@
 {% block title %} | Browse Tutors {% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
+<section style="background-color: rgba(32, 134, 107, 0.8)" class="text-white py-5">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
@@ -37,41 +37,38 @@
         {% if tutors %}
           {% for tutor in tutors %}
           <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card listing-preview">
-                <img class="card-img-top" src="{{ tutor.photo_main.url }}" alt="">
+              <div class="card h-100 listing-preview">
+                <img class="card-img-top" width="120" 
+              height="230" src="{{ tutor.photo_main.url }}" alt="No Photo Uploaded">
                 <!-- <div class="card-img-overlay">
                   <h2>
                     <span class="badge badge-secondary text-white">{{ tutor.id}}</span>
                   </h2>
                 </div> -->
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <div class="listing-heading text-center">
                     <h4 class="text-primary">{{ tutor.name }}</h4>
                   </div>
                   <hr>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-th-large"></i>Subjects: {{tutor.subjects}}</div>
+                      <i class="fa fa-book" aria-hidden="true"></i> Subjects: {{tutor.subjects}}</div>
                     <div class="col-6">
-                      <i class="fas fa-car"></i> Location: {{ tutor.location }}</div>
+                      <i class="fas fa-map-marker"></i> Locations: {{ tutor.locations }}</div>
                   </div>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-bed"></i> Rate: {{ tutor.levels }}</div>
+                      {% if tutor.is_ars %}
+                        <i class="fas fa-user-check"></i> ARS Certified</div>
+                      {% else %}
+                        <i class="fas fa-times-circle"></i> Not Certified</div>
+                      {% endif %}
                     <div class="col-6">
-                      <i class="fas fa-bath"></i> Education: {{ tutor.education }}</div>
-                  </div>
+                      <i class="fas fa-graduation-cap"></i> Education: {{ tutor.education }}</div>
+                    </div>
                   <hr>
-                  <div class="row py-2 text-secondary">
-                    <div class="col-12">
-                      <i class="fas fa-user"></i> {{ listing.realtor }}</div>
-                  </div>
-                  <div class="row text-secondary pb-2">
-                    <div class="col-6">
-                      <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
-                  </div>
-                  <hr>
-                  <a href="{% url 'listing' tutor.id %}" class="btn btn-primary btn-block">More Info</a>
+  
+                  <a href="{% url 'listing' tutor.id %}" class=" btn btn-primary btn-block mt-auto">More Info</a>
                 </div>
               </div>
             </div>

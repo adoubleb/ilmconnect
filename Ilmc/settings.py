@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'multiselectfield',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ilmconnecttechguy@gmail.com'
 EMAIL_HOST_PASSWORD = 'oobyirkghyrituis'
 EMAIL_USE_TLS = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

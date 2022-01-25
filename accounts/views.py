@@ -113,6 +113,7 @@ def edit_profile(request):
       form = UpdateProfileForm(request.POST, request.FILES, instance = tutor_profile)
       if form.is_valid():
         form.save()
+        print('wot')
 
     context = {'form':form}
     return render(request, 'accounts/profile.html', context)
@@ -122,7 +123,10 @@ def edit_profile(request):
     if request.method == 'POST':
       form = UpdateProfileForm(request.POST, request.FILES)
       if form.is_valid():
-        form.save()
+        tutor = form.save(commit=False)
+        tutor.user_id = tutor_id  # The logged-in user
+        tutor.save()
+        print(tutor.user_id)
     context = {'form':form}
     return render(request, 'accounts/profile.html', context)
 

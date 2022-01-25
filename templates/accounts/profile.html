@@ -4,26 +4,52 @@
 {% block title %} | 'Tasks' {% endblock %}
 {% block content %}
 
+{% load crispy_forms_tags %} 
 
-  <section id="showcase-inner" class="py-5 text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-5">Edit Profile</h1>
-        </div>
+<section style="background-color: rgba(32, 134, 107, 0.8)" class="text-white py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h2 class="display-5">Create/Update Profile</h1>
       </div>
     </div>
-  </section>
-  <h2>Update profile here. To publish profile check the published button. </h2>
-  {% include 'partials/_alerts.html' %}
-  <div class="edit_profile m-5">
-    <form method="POST" action= "{% url 'profile' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {{form.as_p}}
-        <input class="btn btn-primary" type="submit" name="Update Information">
-    </form>
   </div>
+</section>
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}">
+            <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active"> Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+{% include 'partials/_alerts.html' %}
+
+<section id="dashboard" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p>To push your profile to the website, check the published checkbox. To take your profile off the website uncheck the published checkbox. The email listed here will be the one where inquiries will be sent to. Phone and Email information will not be made public. Use the description box to add relevant details: tuition at tutor's home, education history, etc. . </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% include 'partials/_alerts.html' %}
+
+<div style="margin-right:85px;margin-left:85px;margin-bottom: 50px;">
+  <form method="POST" action= "{% url 'profile' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {{ form|crispy }}
+      <input class="btn btn-primary" type="submit" name="Update Information">
+  </form>
+</div>
 
 
 {% endblock %}
