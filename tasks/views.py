@@ -35,4 +35,13 @@ def submit_task(request):
 
 def display_task(request):
     return render(request, 'tasks/submit_task.html')
+def delete_task(request):
+  if request.method == 'POST':
+    phone = request.POST['phone']
+    email = request.POST['email']
+    target = Task.objects.all().filter(phone = phone, email = email)
+    for t in target:
+      t.delete()
+    messages.success(request, 'Your tasks has been deleted.')
+    return redirect('/tasks/display_task')
 
