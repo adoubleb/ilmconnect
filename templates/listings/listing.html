@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-md-9">
           <!-- Home Main Image -->
-          <img src="{{ tutors.photo_main.url }}" alt="" class="img-main img-fluid mb-3">
+          <img src="{{ tutors.photo_main.url }}" alt="" style = "height:400px; width:auto;" class = "img-main img-fluid mb-3">
           <!-- Thumbnails -->
           <div class="row mb-5 thumbs">
             {% if tutors.photo_1 %}
@@ -125,9 +125,13 @@
                   <span class="float-right">Abdussatorov</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> ARS status:
-                  <span class="float-right">Uncertified
+                  {% if tutors.is_ars %}
+                  <i class="fas fa-user-check"></i> ARS status:<span class="float-right">Certified
                   </span>
+                  {% else %}
+                  <i class="fas fa-times-circle"></i>ARS status:<span class="float-right">Uncertified
+                  </span>
+                  {% endif %}
                 </li>
 
 
@@ -148,7 +152,7 @@
       </div>
     </div>
   </section>
-
+  
   <!-- Inquiry Modal -->
   <div class="modal fade" id="inquiryModal" role="dialog">
     <div class="modal-dialog">
