@@ -1,11 +1,13 @@
+import re
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from .forms import CreateProfileForm, UpdateProfileForm
-from listings.models import Tutors
+from listings.models import Tutors, Endorsements
 from django import forms
 from contacts.models import Contact
 from tasks.models import Task
+from django.shortcuts import redirect
 def register(request):
     if request.method == 'POST':
     # Get form values
@@ -81,7 +83,7 @@ def dashboard(request):
     context = {
       'tasks': tasks,
     }
-    return render(request, 'accounts/start_dashboard.html')
+    return render(request, 'accounts/start_dashboard.html', context)
 # def create_profile(request):
 #   try:
 #     tutor = request.user.tutors
@@ -115,7 +117,7 @@ def edit_profile(request):
         form.save()
         print('wot')
 
-    context = {'form':form}
+    context = {'form':form, 'profile':profile}
     return render(request, 'accounts/profile.html', context)
   if not profile:
     tutor_id = request.user.id
@@ -127,8 +129,34 @@ def edit_profile(request):
         tutor.user_id = tutor_id  # The logged-in user
         tutor.save()
         print(tutor.user_id)
-    context = {'form':form}
+    context = {'form':form, 'profile':profile}
     return render(request, 'accounts/profile.html', context)
+def endorse(request):
+  tutor = request.user.tutors
+  endorser_name = tutor.name
+  if request.method == 'POST':
+    target_name = request.POST['target']
+    target_instance = Tutors.objects.get(name = target_name)
+    try:
+      endorsement = Endorsements.objects.get(target = target_instance)
+    except:
+      endorsement = None
+    if endorsement:
+      endorsement.endorsers.append(endorser_name)
+      endorsement.save()
+    if not endorsement:
+      endorsement_new = Endorsements.objects.create(target = target_instance, endorsers = [endorser_name])
+      endorsement_new.save()
+  return redirect('profile')
+
+
+
+
+
+  
+
+
+
 
 
 

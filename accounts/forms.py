@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 
-from listings.models import Tutors
+from listings.models import Tutors, Endorsements
 
 class CreateProfileForm(forms.ModelForm):
     class Meta:
@@ -47,4 +47,3 @@ class UpdateProfileForm(forms.ModelForm):
             'photo_5': 'Additional Photo (not required)',
             'photo_6': 'Additional Photo (not required)',
         }
-
