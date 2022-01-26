@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.db.models.fields import BooleanField
+from django.forms import CharField
 from multiselectfield import MultiSelectField
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.contrib.postgres.fields import ArrayField
 
 class Tutors(models.Model):
   SUBJECT_CHOICES = (
@@ -62,3 +64,6 @@ class Tutors(models.Model):
   is_published = models.BooleanField(default=False)
   def __str__(self):
     return self.name
+class Endorsements(models.Model):
+  target = models.OneToOneField(Tutors, null=True, blank=True, on_delete=models.CASCADE)
+  endorsers = ArrayField(base_field = models.CharField(max_length=40) ,blank=True)
