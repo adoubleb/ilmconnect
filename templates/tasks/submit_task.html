@@ -33,6 +33,7 @@
   {% include 'partials/_alerts.html' %}
   <div style="margin-right:85px;margin-left:85px;margin-bottom: 50px;">
     <h3>Submit Task</h3>
+    <p>Submitted task will be made available to all registered tutors.</p>
     <form action="{% url 'submit_task' %}" method="POST">
       {% csrf_token %}
   

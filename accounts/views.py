@@ -7,6 +7,7 @@ from listings.models import Tutors, Endorsements
 from django import forms
 from contacts.models import Contact
 from tasks.models import Task
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 def register(request):
     if request.method == 'POST':
@@ -63,6 +64,7 @@ def logout(request):
     messages.success(request, 'You are now logged out')
     return redirect('index')
 
+@login_required
 def dashboard(request):
   user_id = request.user.id
   try:
@@ -100,6 +102,7 @@ def dashboard(request):
 #   context = {'form':form}
 #   return render(request, 'accounts/profile.html', context)
 
+@login_required
 def edit_profile(request):
   user_id = request.user.id
   try:
@@ -136,17 +139,30 @@ def endorse(request):
   endorser_name = tutor.name
   if request.method == 'POST':
     target_name = request.POST['target']
-    target_instance = Tutors.objects.get(name = target_name)
+    try:
+      target_instance = Tutors.objects.get(name = target_name)
+    except:
+      target_instance = None
+      messages.error(request, "No such tutor exists. Full name of tutor has to be exact.")
+      return redirect('profile')
+    if target_name == endorser_name:
+      messages.error(request, "It doesn't make sense to self-endorse!")
+      return redirect('profile')
     try:
       endorsement = Endorsements.objects.get(target = target_instance)
     except:
       endorsement = None
     if endorsement:
+      if endorser_name in endorsement.endorsers:
+        messages.error(request, "You have already endorsed this tutor")
+        return redirect('profile')
       endorsement.endorsers.append(endorser_name)
       endorsement.save()
+      messages.success(request, "Endorsement Successful")
     if not endorsement:
       endorsement_new = Endorsements.objects.create(target = target_instance, endorsers = [endorser_name])
       endorsement_new.save()
+      messages.success(request, "Endorsement Successful")
   return redirect('profile')
 
 

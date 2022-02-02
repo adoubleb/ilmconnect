@@ -40,8 +40,11 @@ def delete_task(request):
     phone = request.POST['phone']
     email = request.POST['email']
     target = Task.objects.all().filter(phone = phone, email = email)
-    for t in target:
-      t.delete()
-    messages.success(request, 'Your tasks has been deleted.')
+    if target:
+      for t in target:
+        t.delete()
+      messages.success(request, 'Your tasks has been deleted.')
+    else:
+      messages.error(request,'No such tasks, double check input phone number and email.')
     return redirect('/tasks/display_task')
 
