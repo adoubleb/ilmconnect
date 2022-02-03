@@ -153,3 +153,9 @@ EMAIL_HOST_PASSWORD = 'oobyirkghyrituis'
 EMAIL_USE_TLS = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
